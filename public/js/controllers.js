@@ -2,6 +2,13 @@
 
 /* Controllers */
 
+        var app = angular.module("demoapp", ["leaflet-directive"]);
+        app.controller("DemoController", [ "$scope", function($scope) {
+                // Nothing here!
+        }]);
+
+
+
 angular.module('myApp.controllers', []).
   controller('AppCtrl', function ($scope, socket) {
     socket.on('send:name', function (data) {
