@@ -8,7 +8,7 @@ angular.module('myApp.controllers', []).
       $scope.name = data.name;
     });
   }).
-  controller('MyCtrl1', function ($scope, socket) {
+  controller('MapasCtrl', function ($scope, socket) {
     socket.on('send:time', function (data) {
       $scope.time = data.time;
     });

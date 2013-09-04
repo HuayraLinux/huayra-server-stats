@@ -7,22 +7,23 @@ angular.module('myApp', [
   'myApp.filters',
   'myApp.services',
   'myApp.directives',
+  "leaflet-directive",
 
   // 3rd party dependencies
   'btford.socket-io'
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
-    when('/view1', {
-      templateUrl: 'partials/partial1',
-      controller: 'MyCtrl1'
+    when('/mapas', {
+      templateUrl: 'partials/mapas',
+      controller: 'MapasCtrl'
     }).
-    when('/view2', {
-      templateUrl: 'partials/partial2',
+    when('/estadisticas', {
+      templateUrl: 'partials/estadisticas',
       controller: 'MyCtrl2'
     }).
     otherwise({
-      redirectTo: '/view1'
+      redirectTo: '/mapas'
     });
 
   $locationProvider.html5Mode(true);
