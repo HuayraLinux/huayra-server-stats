@@ -3784,3 +3784,12 @@ footer ul li a {
   }
 
 }
+
+.espera {
+  color: gray;
+  text-align: center;
+}
+
+.fecha {
+  color: gray;
+}

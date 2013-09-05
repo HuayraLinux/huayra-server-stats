@@ -10,13 +10,25 @@ var puntoSchema = mongoose.Schema({
 });
 var Punto = mongoose.model('Punto', puntoSchema)
 
+var eventoSchema = mongoose.Schema({
+    texto: String,
+    clase: String, // warning, success, info
+    fecha: {type: Date, default: Date.now}
+});
+var Evento = mongoose.model('Evento', eventoSchema)
+
+
 exports.puntos = function(req, res) {
 	Punto.find(function(err, data) {
 		res.json(data);
 	});
 }
 
-
+exports.eventos = function(req, res) {
+	Evento.find(function(err, data) {
+		res.json(data);
+	});
+}
 
 function crear_punto_desde_request(req) {
 	var data = {
@@ -60,6 +72,10 @@ function crear_punto_desde_ip(ip, callback) {
 	});
 }
 
+function crear_evento(mensaje) {
+	var evento = new Evento({texto: mensaje, clase: 'success'});
+	evento.save();
+}
 
 /*
  * Se le notifica que ha llegado un nuevo equipo al sistema.
@@ -76,10 +92,12 @@ exports.crear_punto = function(req, res) {
 	var punto;
 
 	if (req.body.ip === undefined) {
+		crear_evento("Se ha conectado un equipo nuevo.");
 		punto = crear_punto_desde_request(req);
 		punto.save();
 		res.json({});
 	} else {
+		crear_evento("Se ha conectado un equipo desde la ip: " + req.body.ip);
 		crear_punto_desde_ip(req.body.ip, function(punto) {
 			punto.save();
 			res.json({});

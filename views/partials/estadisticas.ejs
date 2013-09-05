@@ -14,9 +14,6 @@
             </div>
 
 
-
-
-
             <div class="status-widgets">
                 <div class="row-fluid">
                     <div class="span4">
@@ -26,14 +23,14 @@
                                     <li><a href="#"><i class="icon-cog"></i></a></li>
                                     <li><a href="#"><i class="icon-refresh"></i></a></li>
                                 </ul>
-                                <i class="icon-shopping-cart"></i>
+                                <i class="icon-calendar"></i>
                             </div>
                             <div class="details">
                                 <div class="number">
-                                    382
+                                    {{equipos_conectados_este_mes}}
                                 </div>
                                 <div class="description">
-                                    New Orders
+                                    Equipos conectados este mes
                                 </div>
                             </div>
                             <a href="#" class="more"><i class="icon-arrow-right"></i></a>
@@ -51,10 +48,10 @@
                             </div>
                             <div class="details">
                                 <div class="number">
-                                    52.587
+                                    {{equipos_conectados_en_total}}
                                 </div>
                                 <div class="description">
-                                    New Visitors
+                                    Equipos conectados en total
                                 </div>
                             </div>
                             <a href="#" class="more"><i class="icon-arrow-right"></i></a>
@@ -72,10 +69,10 @@
                             </div>
                             <div class="details">
                                 <div class="number">
-                                    $253k
+                                    {{equipos_sin_reportarse}}
                                 </div>
                                 <div class="description">
-                                    Monthly Earning
+                                    Equipos sin reportarse este mes
                                 </div>
                             </div>
                             <a href="#" class="more"><i class="icon-arrow-right"></i></a>
@@ -126,43 +123,13 @@
 
                             <div class="well-content no_padding">
                                 <ul class="rows">
-                                    <li>
-                                        <span class="icon error"><i class="icon-bolt"></i></span>
-                                        <p>Server overloaded, please take care of it!</p>
-                                    </li>
-                                    <li>
-                                        <span class="icon info"><i class="icon-bell"></i></span>
-                                        <p>New update for cms is available.</p>
-                                    </li>
-                                    <li>
-                                        <span class="icon success"><i class="icon-ok"></i></span>
-                                        <p>New settings saved successfully.</p>
-                                    </li>
-                                    <li>
-                                        <span class="icon warning"><i class="icon-bullhorn"></i></span>
-                                        <p>You are reaching your diskspace limit.</p>
-                                    </li>
-                                    <li>
-                                        <span class="icon error"><i class="icon-bolt"></i></span>
-                                        <p>Diskspace limit reached. <a href="#">Expand</a> your limit!</p>
-                                    </li>
-                                    <li>
-                                        <span class="icon info"><i class="icon-bell"></i></span>
-                                        <p>New version 1.01 is available for download!</p>
-                                    </li>
-                                    <li>
-                                        <span class="icon success"><i class="icon-ok"></i></span>
-                                        <p>New order recieved from user <a href="#">rhoulettex</a>
-                                    </li>
-                                    <li>
-                                        <span class="icon warning"><i class="icon-bullhorn"></i></span>
-                                        <p>This could be a warning on something...</p>
+                                    <li ng-repeat='evento in eventos'>
+                                        <span class="icon {{evento.clase}}"><i class="icon-bolt"></i></span>
+                                        <p><span class='fecha'>{{evento.fecha | date:'yyyy-MM-dd HH:mm:ss'}}</span> - {{evento.texto}}</p>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-
-                        
 
                     </div>
                 </div>

@@ -55,6 +55,8 @@ app.get('/partials/:name', routes.partials);
 app.get('/api/puntos', api.puntos);
 app.post('/api/puntos', api.crear_punto)
 
+app.get('/api/eventos', api.eventos);
+
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 

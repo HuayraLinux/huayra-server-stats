@@ -20,7 +20,7 @@ config(function ($routeProvider, $locationProvider) {
     }).
     when('/estadisticas', {
       templateUrl: 'partials/estadisticas',
-      controller: 'MyCtrl2'
+      controller: 'EstadisticasCtrl'
     }).
     otherwise({
       redirectTo: '/mapas'

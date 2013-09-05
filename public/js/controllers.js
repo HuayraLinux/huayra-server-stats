@@ -18,6 +18,7 @@ controller('AppCtrl', function ($scope, socket) {
 }).
 controller('MapasCtrl', function ($scope, $http, socket) {
   var puntos_del_mapa = {};
+  $scope.cargando = "Cargando ...";
 
   angular.extend($scope, {
     center: {
@@ -62,6 +63,7 @@ controller('MapasCtrl', function ($scope, $http, socket) {
     for (i=0; i<registros.length; i++)
       $scope.agregar_punto(registros[i]);
 
+    $scope.cargando = "";
     $scope.actualizar_mapa();
   });
 
@@ -71,6 +73,15 @@ controller('MapasCtrl', function ($scope, $http, socket) {
     $scope.time = data.time;
   });
 }).
-controller('MyCtrl2', function ($scope) {
-    // write Ctrl here
+controller('EstadisticasCtrl', function ($scope, $http) {
+    $scope.eventos = [];
+    $scope.equipos_sin_reportarse = 0;
+    $scope.equipos_conectados_en_total = 0;
+    $scope.equipos_conectados_este_mes = 0;
+
+    $http.get('/api/eventos').then(function(res) {
+      var registros = res.data;
+      $scope.eventos = registros;
+    })
+
   });
