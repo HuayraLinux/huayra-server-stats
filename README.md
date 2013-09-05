@@ -2,7 +2,7 @@ huayraStats
 ============
 
 **huayraStats** es una aplicación que permite visualizar servidores
-de la distribución linux Huayra distribuidos en argentina.
+de la distribución linux Huayra distribuidos en Argentina.
 
 ![](https://raw.github.com/hugoruscitti/huayra-stats/master/images/preview.png)
 
@@ -37,8 +37,11 @@ API
     </tr>
 </table>
 
+Tener en cuenta, la llamada para notificar la posición de los equipos
+se puede hacer de dos formas distintas.
 
-Aquí algunos ejemplos de invocación:
+Ejemplos de invocación:
+_______________________
 
 Solicitar todos los puntos del mapa:
 
