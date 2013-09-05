@@ -40,8 +40,7 @@ API
 Tener en cuenta, la llamada para notificar la posición de los equipos
 se puede hacer de dos formas distintas.
 
-Ejemplos de invocación:
-_______________________
+**Ejemplos de invocación:**
 
 Solicitar todos los puntos del mapa:
 
