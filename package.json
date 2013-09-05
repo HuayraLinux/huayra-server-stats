@@ -7,7 +7,8 @@
     "express": "~3.2.6",
     "jade": "~0.31.2",
     "ejs-locals": "~1.0.2",
-    "express-ejs-layouts": "~0.3.1"
+    "express-ejs-layouts": "~0.3.1",
+    "mongoose": "~3.6.19"
   },
   "devDependencies": {
     "ejs": "~0.8.4"

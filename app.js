@@ -52,8 +52,8 @@ if (app.get('env') === 'production') {
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
-// JSON API
-app.get('/api/name', api.name);
+app.get('/api/puntos', api.puntos);
+app.post('/api/puntos', api.crear_punto)
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
