@@ -4,7 +4,7 @@ huayraStats
 **huayraStats** es una aplicación que permite visualizar servidores
 de la distribución linux Huayra distribuidos en Argentina.
 
-![](https://raw.github.com/hugoruscitti/huayra-stats/master/images/preview.png)
+![](./images/preview.png)
 
 
 API
