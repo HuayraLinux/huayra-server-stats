@@ -98,14 +98,22 @@
 
                             <div class="well-content">
                                 <div class="no-search">
-                                    <select class="chosen">
-                                        <option>Todos</option>
-                                        <option>Solo este mes</option>
-                                        <option>Solo hoy</option>
 
-                                    </select>
+                                    <select ng-model="criterio" ng-options="c.etiqueta for c in criterios"></select>
                                 </div>
-                                <div id="chartLine01" style="height: 250px; width: 100%;"></div>
+
+                                <div>
+
+                                <!-- <input ng-model='data' ng-list/>
+
+                                -->
+
+                                    <bar-chart width='500' height="300" data="data" hovered="hovered(args)"></bar-chart>
+                                    <!--<bar-chart height="300" data="data" hovered="hovered(args)></bar-chart>-->
+                                    <div ng-show='barValue'>Valor de la barra actual: {{barValue}}</div>
+                                    <div ng-hide='barValue'>Posicione el mouse sobre una barra</div>
+                                </div>
+
                             </div>
                         </div>
 

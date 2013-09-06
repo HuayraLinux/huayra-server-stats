@@ -3793,3 +3793,16 @@ footer ul li a {
 .fecha {
   color: gray;
 }
+
+.axis path, .axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+.axis path{
+    fill: none;
+    stroke: none;
+}
+.bar {
+    fill: steelblue;
+}

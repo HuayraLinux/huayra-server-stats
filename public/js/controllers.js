@@ -2,12 +2,7 @@
 
 /* Controllers */
 
-var app = angular.module("demoapp", ["leaflet-directive"]);
-
-app.controller("DemoController", [ "$scope", function($scope) {
-                // Nothing here!
-              }]);
-
+var app = angular.module("demoapp", ["leaflet-directive", "myApp.directives"]);
 
 
 angular.module('myApp.controllers', []).
@@ -78,6 +73,37 @@ controller('EstadisticasCtrl', function ($scope, $http) {
     $scope.equipos_sin_reportarse = 0;
     $scope.equipos_conectados_en_total = 0;
     $scope.equipos_conectados_este_mes = 0;
+
+    $scope.criterios = [
+      {etiqueta: 'Todos', valor: 0},
+      {etiqueta: 'Este mes', valor: 1},
+      {etiqueta: 'Solo hoy', valor: 2},
+    ];
+    $scope.criterio = $scope.criterios[0];
+
+
+    $scope.$watch('criterio', function (nuevo, anterior) {
+      var datos = {
+        0: [10, 20, 11, 40, 43],
+        1: [2, 3],
+        2: [3],
+      }
+
+      $scope.data = datos[nuevo.valor];
+    });
+
+
+
+
+    $scope.options = {width: 500, height: 300};
+    $scope.data = [1, 2, 3, 4];
+
+    $scope.hovered = function(d){
+      $scope.barValue = d;
+      $scope.$apply();
+    };
+
+    $scope.barValue = 0;
 
     $http.get('/api/eventos').then(function(res) {
       var registros = res.data;
