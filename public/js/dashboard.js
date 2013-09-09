@@ -77,7 +77,7 @@ jQuery(function($) {
       { data: dt2, color: '#ac193d', label: 'Last month profit', points: { show: false }, lines: { lineWidth: 2, fill: false } }
   ];
 
-  $.plot($("#chartLine01"), data, options);
+  //$.plot($("#chartLine01"), data, options);
 
   var previousPoint = null;
   $("#chartLine01").bind("plothover", function (event, pos, item) {
@@ -123,6 +123,7 @@ jQuery(function($) {
       }
   ];
 
+/*
   $.plot($("#sidebarchart"), data1, {
       xaxis: {
           show: true,
@@ -163,7 +164,7 @@ jQuery(function($) {
           show: false
       }
   });
-
+*/
   var d1 = [[1262304000000, 2043], [1264982400000, 2564], [1267401600000, 2043], [1270080000000, 2198], [1272672000000, 2660], [1275350400000, 2782], [1277942400000, 2430], [1280620800000, 2427], [1283299200000, 2100], [1285891200000, 1214], [1288569600000, 1557], [1291161600000, 2645]];
  
   var data1 = [
@@ -173,7 +174,7 @@ jQuery(function($) {
           color: '#82ba00' 
       }
   ];
-
+/*
   $.plot($("#sidebarchart2"), data1, {
       xaxis: {
           show: true,
@@ -214,5 +215,5 @@ jQuery(function($) {
           show: false
       }
   });
-
+*/
 });

@@ -17,6 +17,7 @@ angular.module('myApp.directives', []).
                 },
                 link: function(scope, element, attrs) {
                     var chartEl = d3.select(element[0]);
+           
                     chart.on('customHover', function(d, i){
                         scope.hovered({args:d});
                     });

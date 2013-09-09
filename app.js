@@ -7,7 +7,6 @@ var express = require('express'),
   routes = require('./routes'),
   api = require('./routes/api'),
   http = require('http'),
-  expressLayouts = require('express-ejs-layouts'),
   path = require('path');
 
 
@@ -19,18 +18,15 @@ var io = require('socket.io').listen(server);
  * Configuration
  */
 
-// all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-app.set('layout', 'layout');
 
 
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(expressLayouts);
 app.use(app.router);
 
 // development only

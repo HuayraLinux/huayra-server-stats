@@ -4,14 +4,10 @@
 
 var app = angular.module("demoapp", ["leaflet-directive", "myApp.directives"]);
 
+var controllers = angular.module('myApp.controllers', []);
 
-angular.module('myApp.controllers', []).
-controller('AppCtrl', function ($scope, socket) {
-  socket.on('send:name', function (data) {
-    $scope.name = data.name;
-  });
-}).
-controller('MapasCtrl', function ($scope, $http, socket) {
+
+controllers.controller('MapasCtrl', function ($scope, $http, socket) {
   var puntos_del_mapa = {};
   $scope.cargando = "Cargando ...";
 
@@ -67,8 +63,10 @@ controller('MapasCtrl', function ($scope, $http, socket) {
   socket.on('send:time', function (data) {
     $scope.time = data.time;
   });
-}).
-controller('EstadisticasCtrl', function ($scope, $http) {
+});
+
+
+controllers.controller('EstadisticasCtrl', function ($scope, $http) {
     $scope.eventos = [];
     $scope.equipos_sin_reportarse = 0;
     $scope.equipos_conectados_en_total = 0;
@@ -84,16 +82,13 @@ controller('EstadisticasCtrl', function ($scope, $http) {
 
     $scope.$watch('criterio', function (nuevo, anterior) {
       var datos = {
-        0: [10, 20, 11, 40, 43],
-        1: [2, 3],
-        2: [3],
+        0: [ 28, 48, 40, 19, 96, 247, 100, 237, 100, 27, 1100, 200],
+        1: [ 128, 48, 10, 19, 96, 27, 1100, 27, 100, 27, 1300, 200],
+        2: [ 28, 48, 4110, 219, 96, 327, 100, 27, 100, 27, 100, 2020],
       }
 
-      $scope.data = datos[nuevo.valor];
+      $scope.datos.datasets[0].data = datos[nuevo.valor];
     });
-
-
-
 
     $scope.options = {width: 500, height: 300};
     $scope.data = [1, 2, 3, 4];
@@ -108,6 +103,25 @@ controller('EstadisticasCtrl', function ($scope, $http) {
     $http.get('/api/eventos').then(function(res) {
       var registros = res.data;
       $scope.eventos = registros;
-    })
+    });
+
+
+    $scope.datos = {
+      labels : [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+      datasets : [
+      {
+        fillColor : 'rgba(151,187,205,0.5)',
+        strokeColor : 'rgba(151,187,205,1)',
+        data : [ 28, 48, 40, 19, 96, 27, 100, 27, 100, 27, 100, 200]
+      }
+      ]
+    };
+
+    $scope.options =  {
+    };
+
+
+
+
 
   });

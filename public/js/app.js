@@ -1,16 +1,14 @@
 'use strict';
 
-// Declare app level module which depends on filters, and services
-
 angular.module('myApp', [
   'myApp.controllers',
   'myApp.filters',
   'myApp.services',
   'myApp.directives',
   "leaflet-directive",
-
-  // 3rd party dependencies
-  'btford.socket-io'
+  'btford.socket-io',
+  'tc.chartjs',
+  'app.bar'
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
@@ -25,6 +23,4 @@ config(function ($routeProvider, $locationProvider) {
     otherwise({
       redirectTo: '/mapas'
     });
-
-  $locationProvider.html5Mode(true);
 });

@@ -3449,10 +3449,6 @@ footer ul li a {
     padding: 0;
   }
 
-  header a.logo_image {
-    display: none;
-  }
-
   header ul.quick_header_actions {
     display: none;
   }
