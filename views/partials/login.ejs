@@ -1,0 +1,21 @@
+<div class="sidebar login">
+<p>
+Por favor indique sus datos de ingreso:
+
+
+
+<div ng-show='error' class='alert alert-danger'>{{error}}</div>
+
+<form ng-submit="login()">
+<p>
+	<label>Nombre <input ng-model='nombre' type='text'></input>
+<p>
+	<label>Contraseña <input ng-model='password' type='password'></input>
+
+<p>
+	<button type='submit' class='btn btn-success'>Ingresar</button>
+</form>
+
+
+
+</div>

@@ -18,6 +18,13 @@ var eventoSchema = mongoose.Schema({
 var Evento = mongoose.model('Evento', eventoSchema)
 
 
+var usuarioSchema = mongoose.Schema({
+    nombre: String,
+    hash: String,
+});
+var Usuario = mongoose.model('Usuario', usuarioSchema)
+
+
 exports.puntos = function(req, res) {
 	Punto.find(function(err, data) {
 		res.json(data);

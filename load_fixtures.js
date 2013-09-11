@@ -9,6 +9,12 @@ var puntoSchema = mongoose.Schema({
 });
 var Punto = mongoose.model('Punto', puntoSchema)
 
+var usuarioSchema = mongoose.Schema({
+    nombre: String,
+    hash: String,
+});
+var Usuario = mongoose.model('Usuario', usuarioSchema)
+
 
 var punto = new Punto({
     	lat: -33.128351,
@@ -17,3 +23,7 @@ var punto = new Punto({
 });
 
 punto.save();
+
+
+var admin = new Usuario({nombre: 'admin', hash: '123'});
+admin.save();

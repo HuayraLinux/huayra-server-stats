@@ -3802,3 +3802,17 @@ footer ul li a {
 .bar {
     fill: steelblue;
 }
+
+
+
+
+div.login {
+  width: 300px;
+  margin: auto;
+  margin-top: 100px;
+}
+
+
+  div.login label {
+      width: 50px;
+  }

@@ -7,6 +7,48 @@ var app = angular.module("demoapp", ["leaflet-directive", "myApp.directives"]);
 var controllers = angular.module('myApp.controllers', []);
 
 
+
+controllers.factory('SessionService', function() {
+  var current_user = undefined;
+
+  return {
+    autenticar: function(nombre, password, exito_callback, error_callback) {
+
+      if (nombre == 'admin' && password == '123123') {
+        current_user = nombre;
+        exito_callback();
+      }
+      else {
+        current_user = undefined;
+        error_callback();
+      }
+    },
+
+    autentificado: function() {
+      return !!current_user;
+    }
+  };
+});
+
+
+controllers.controller("LoginCtrl", function($scope, $location, SessionService) {
+  $scope.error = "";
+  $scope.nombre = "";
+  $scope.password = "";
+
+  $scope.login = function () {
+
+    SessionService.autenticar($scope.nombre, $scope.password, function() {
+        $location.path('/mapas');
+      }, function() {
+        $scope.error = "El nombre de usuario o contraseña son inválidos.";
+        $location.path('/login');
+        $scope.password = "";
+      }
+    );
+  }
+});
+
 controllers.controller('MapasCtrl', function ($scope, $http, socket) {
   var puntos_del_mapa = {};
   $scope.cargando = "Cargando ...";

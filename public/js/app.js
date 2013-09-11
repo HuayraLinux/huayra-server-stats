@@ -3,7 +3,6 @@
 angular.module('myApp', [
   'myApp.controllers',
   'myApp.filters',
-  'myApp.services',
   'myApp.directives',
   "leaflet-directive",
   'btford.socket-io',
@@ -20,7 +19,11 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: 'partials/estadisticas',
       controller: 'EstadisticasCtrl'
     }).
+    when('/login', {
+      templateUrl: 'partials/login',
+      controller: 'LoginCtrl'
+    }).
     otherwise({
-      redirectTo: '/mapas'
+      redirectTo: '/login'
     });
 });
