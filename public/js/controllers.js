@@ -49,7 +49,7 @@ controllers.controller("LoginCtrl", function($scope, $location, SessionService) 
   }
 });
 
-controllers.controller('MapasCtrl', function ($scope, $http, socket) {
+controllers.controller('MapasCtrl', function ($scope, $http) {
   var puntos_del_mapa = {};
   $scope.cargando = "Cargando ...";
 
@@ -111,9 +111,11 @@ controllers.controller('MapasCtrl', function ($scope, $http, socket) {
 
   $scope.actualizar_mapa();
 
+  /*
   socket.on('send:time', function (data) {
     $scope.time = data.time;
   });
+  */
 });
 
 

@@ -5,7 +5,7 @@ angular.module('myApp', [
   'myApp.filters',
   'myApp.directives',
   "leaflet-directive",
-  'btford.socket-io',
+  //'btford.socket-io',
   'tc.chartjs',
   'app.bar'
 ]).
