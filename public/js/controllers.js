@@ -119,9 +119,9 @@ controllers.controller('MapasCtrl', function ($scope, $http, socket) {
 
 controllers.controller('EstadisticasCtrl', function ($scope, $http) {
     $scope.eventos = [];
-    $scope.equipos_sin_reportarse = 0;
-    $scope.equipos_conectados_en_total = 0;
-    $scope.equipos_conectados_este_mes = 0;
+    $scope.equipos_sin_reportarse = 310;
+    $scope.equipos_conectados_en_total = 860;
+    $scope.equipos_conectados_este_mes = 550;
 
     $scope.criterios = [
       {etiqueta: 'Todos', valor: 0},
@@ -133,16 +133,15 @@ controllers.controller('EstadisticasCtrl', function ($scope, $http) {
 
     $scope.$watch('criterio', function (nuevo, anterior) {
       var datos = {
-        0: [ 28, 48, 40, 19, 96, 247, 100, 237, 100, 27, 1100, 200],
-        1: [ 128, 48, 10, 19, 96, 27, 1100, 27, 100, 27, 1300, 200],
-        2: [ 28, 48, 4110, 219, 96, 327, 100, 27, 100, 27, 100, 2020],
+        0: [ 28, 48, 40, 19, 96, 247, 100, 237, 100, 27, 250, 200],
+        1: [ 18, 18, 10, 19, 16, 24, 20, 22, 33, 17, 25, 20],
+        2: [ 8, 8, 4, 2, 6, 4, 10, 12, 10, 9, 10, 10],
       }
 
       $scope.datos.datasets[0].data = datos[nuevo.valor];
     });
 
     $scope.options = {width: 500, height: 300};
-    $scope.data = [1, 2, 3, 4];
 
     $scope.hovered = function(d){
       $scope.barValue = d;
