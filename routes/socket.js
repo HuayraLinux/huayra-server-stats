@@ -3,6 +3,7 @@
  */
 
 module.exports = function (socket) {
+  /*
   socket.emit('send:name', {
     name: 'Bob'
   });
@@ -10,5 +11,5 @@ module.exports = function (socket) {
   socket.on("mensaje", function(data) {
   	console.log(data);
   });
-
+  */
 };

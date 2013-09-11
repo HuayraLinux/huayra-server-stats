@@ -166,7 +166,5 @@ controllers.controller('EstadisticasCtrl', function ($scope, $http) {
       }
       ]
     };
-
-    $scope.options =  {
-    };
+    
   });
