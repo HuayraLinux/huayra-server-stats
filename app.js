@@ -49,7 +49,10 @@ app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
 app.get('/api/puntos', api.puntos);
-app.post('/api/puntos', api.crear_punto)
+app.post('/api/puntos', api.crear_punto);
+app.post('/api/puntosprueba', api.crear_punto_prueba);
+
+
 
 app.get('/api/eventos', api.eventos);
 

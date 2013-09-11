@@ -93,8 +93,17 @@ controllers.controller('MapasCtrl', function ($scope, $http, socket) {
     var registros = res.data;
     var i;
 
-    for (i=0; i<registros.length; i++)
-      $scope.agregar_punto(registros[i]);
+    for (i=0; i<registros.length; i++) {
+      var punto = {
+        message: registros[i].message,
+        lat: registros[i].lat,
+        lng: registros[i].lng
+      }
+
+      /* Solo se representan puntos que tengan posicion */
+      if (punto.lng && punto.lat)
+        $scope.agregar_punto(punto);
+    }
 
     $scope.cargando = "";
     $scope.actualizar_mapa();
@@ -161,9 +170,4 @@ controllers.controller('EstadisticasCtrl', function ($scope, $http) {
 
     $scope.options =  {
     };
-
-
-
-
-
   });
