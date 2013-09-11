@@ -39,10 +39,10 @@ controllers.controller("LoginCtrl", function($scope, $location, SessionService) 
   $scope.login = function () {
 
     SessionService.autenticar($scope.nombre, $scope.password, function() {
-        $location.path('/mapas');
+        $location.path('mapas');
       }, function() {
         $scope.error = "El nombre de usuario o contraseña son inválidos.";
-        $location.path('/login');
+        $location.path('login');
         $scope.password = "";
       }
     );
@@ -89,7 +89,7 @@ controllers.controller('MapasCtrl', function ($scope, $http) {
   }
 
 
-  $http.get('/api/puntos').then(function(res) {
+  $http.get('api/puntos').then(function(res) {
     var registros = res.data;
     var i;
 
@@ -152,7 +152,7 @@ controllers.controller('EstadisticasCtrl', function ($scope, $http) {
 
     $scope.barValue = 0;
 
-    $http.get('/api/eventos').then(function(res) {
+    $http.get('api/eventos').then(function(res) {
       var registros = res.data;
       $scope.eventos = registros;
     });
