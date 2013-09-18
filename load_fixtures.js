@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/huayra-stats');
+mongoose.connect('mongodb://localhost/huayra-stats-db');
 
 /* SCHEMAS */
 var puntoSchema = mongoose.Schema({
@@ -11,11 +11,28 @@ var puntoSchema = mongoose.Schema({
 });
 var Punto = mongoose.model('Punto', puntoSchema)
 
+console.log("Eliminando todos los puntos del mapa.");
+Punto.collection.drop();
+
 var usuarioSchema = mongoose.Schema({
     nombre: String,
     hash: String,
 });
 var Usuario = mongoose.model('Usuario', usuarioSchema)
+
+console.log("Eliminando todos los usuarios del sistema.");
+Usuario.collection.drop();
+
+var eventoSchema = mongoose.Schema({
+    texto: String,
+    clase: String,
+    fecha: {type: Date, default: Date.now}
+});
+var Evento = mongoose.model('Evento', eventoSchema)
+
+console.log("Eliminando todos los eventos del sistema.");
+Evento.collection.drop();
+
 
 
 puntos = [
@@ -40,19 +57,44 @@ puntos = [
   {lat: -50.06419173665909,   lng: -70.751953125},
 ];
 
+  
+console.log("Creando " + puntos.length + " puntos dentro del mapa");
+ 
 for (i=0; i<puntos.length; i++) {
 
   var punto = new Punto({
     lat: puntos[i].lat,
     lng: puntos[i].lng,
-    message: "Equipo ip=200.10.199.103"
+    message: "Punto de prueba (cargado desde el script load_fixture.js)"
   });
 
   punto.save();
-  console.log(punto);
 }
 
-var admin = new Usuario({nombre: 'admin', hash: '123'});
+console.log("Creando el usuario 'admin' (por favor cambie la contraseña mas tarde).");
+
+var admin = new Usuario({nombre: 'admin', hash: 'admin'});
 admin.save();
 
-process.exit(0);
+
+console.log("Creando eventos de prueba.");
+
+var evento = new Evento({texto: "Evento de ejemplo", clase: "warning"});
+evento.save();
+
+var evento = new Evento({texto: "Evento de ejemplo mas reciente", clase: "warning"});
+evento.save();
+
+
+var fecha = new Date();
+fecha.setMonth(fecha.getMonth() - 1);
+var evento = new Evento({texto: "Evento del mes pasado", clase: "info", fecha: fecha});
+evento.save();
+
+
+
+// TODO: Buscar una forma de sincronizar la base de datos sin
+//       usar una demora así...
+setTimeout(function() {
+	process.exit(0);
+}, 1000);

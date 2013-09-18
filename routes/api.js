@@ -1,6 +1,6 @@
 var http = require('http');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/huayra-stats');
+mongoose.connect('mongodb://localhost/huayra-stats-db');
 
 /* SCHEMAS */
 var puntoSchema = mongoose.Schema({
@@ -102,13 +102,13 @@ exports.crear_punto = function(req, res) {
 	var punto;
 
 	if (req.body.mac) {
-		var ip = "190.2.11.125";
+		var ip = req.ip;
 		var mensaje = "Se ha conectado un equipo: mac=" + req.body.mac + " ip=" + ip;
+      
 		crear_evento(mensaje);
 
 		crear_punto_desde_mac(ip, req.body.mac, function(punto) {
 			punto.save();
-			// TODO: No exponer el registro de la base de datos.
 			res.json({ip: ip, mensaje: mensaje, punto: punto});
 		});
 	} else {
@@ -131,4 +131,52 @@ exports.crear_punto_prueba = function(req, res) {
  		punto.save();
  		res.json({status: 'ok', punto: punto});
  	}
+}
+
+/*
+ * Retorna un diccionario con dos fechas que representan
+ * el mes actual.
+ */ 
+function obtener_rango_de_fechas_este_mes() {
+  var hoy = new Date();
+  var inicio = new Date();
+  var fin = new Date();
+  
+  inicio.setDate(1);
+  fin.setDate(1);
+  fin.setMonth(fin.getMonth()+1);
+  
+  return  {"$gte": inicio, "$lt": fin};
+}
+
+exports.desconectados = function(req, res) {
+  
+  Evento.find({}, function(err, result) {
+  	var criterio_de_orden = obtener_rango_de_fechas_este_mes();
+    var cantidad_total = result.length;
+    
+    Evento.find({"fecha": criterio_de_orden}, function(err, result) {
+      var cantidad_este_mes = result.length;
+      res.json({cantidad: cantidad_total - cantidad_este_mes});
+    })
+    
+  });
+
+}
+
+
+exports.conectados_este_mes = function(req, res) {
+  var criterio_de_orden = obtener_rango_de_fechas_este_mes();
+  
+  Evento.find({"fecha": criterio_de_orden}, function(err, result) {
+    var cantidad = result.length;
+    res.json({cantidad: cantidad});
+  })
+}
+
+exports.conectados_en_total = function(req, res) {
+  Evento.find({}, function(err, result) {
+    var cantidad = result.length;
+    res.json({cantidad: cantidad});
+  })
 }

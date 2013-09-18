@@ -121,10 +121,12 @@ controllers.controller('MapasCtrl', function ($scope, $http) {
 
 controllers.controller('EstadisticasCtrl', function ($scope, $http) {
     $scope.eventos = [];
-    $scope.equipos_sin_reportarse = 310;
-    $scope.equipos_conectados_en_total = 860;
-    $scope.equipos_conectados_este_mes = 550;
+    $scope.equipos_sin_reportarse = 0;
+    $scope.equipos_conectados_en_total = 0;
+    $scope.equipos_conectados_este_mes = 0;
 
+    
+    
     $scope.criterios = [
       {etiqueta: 'Todos', valor: 0},
       {etiqueta: 'Este mes', valor: 1},
@@ -135,9 +137,9 @@ controllers.controller('EstadisticasCtrl', function ($scope, $http) {
 
     $scope.$watch('criterio', function (nuevo, anterior) {
       var datos = {
-        0: [ 28, 48, 40, 19, 96, 247, 100, 237, 100, 27, 250, 200],
-        1: [ 18, 18, 10, 19, 16, 24, 20, 22, 33, 17, 25, 20],
-        2: [ 8, 8, 4, 2, 6, 4, 10, 12, 10, 9, 10, 10],
+        0: [28, 48, 40, 19, 96, 247, 100, 237, 100, 27, 250, 200],
+        1: [18, 18, 10, 19, 16, 24, 20, 22, 33, 17, 25, 20],
+        2: [8, 8, 4, 2, 6, 4, 10, 12, 10, 9, 10, 10],
       }
 
       $scope.datos.datasets[0].data = datos[nuevo.valor];
@@ -157,9 +159,21 @@ controllers.controller('EstadisticasCtrl', function ($scope, $http) {
       $scope.eventos = registros;
     });
 
+    
+    $http.get('api/desconectados').then(function(res) {
+      $scope.equipos_sin_reportarse = res.data.cantidad;
+    });
 
+    $http.get('api/conectados_este_mes').then(function(res) {
+      $scope.equipos_conectados_este_mes = res.data.cantidad;
+    });
+  
+    $http.get('api/conectados_en_total').then(function(res) {
+      $scope.equipos_conectados_en_total = res.data.cantidad;
+    });
+  
     $scope.datos = {
-      labels : [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+      labels : ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
       datasets : [
       {
         fillColor : 'rgba(151,187,205,0.5)',
