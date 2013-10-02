@@ -1,8 +1,8 @@
-huayraStats
-============
+Huayra Server Stats
+===================
 
-**huayraStats** es una aplicación que permite visualizar servidores
-de la distribución linux Huayra distribuidos en Argentina.
+**huayra-server-stats** es una aplicación que permite geolocalizar
+cada cada gestor escolar distribuido en el Pais.
 
 ![](./images/preview.png)
 
