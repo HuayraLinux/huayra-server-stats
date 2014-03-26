@@ -49,6 +49,7 @@ app.post('/api/puntosprueba', api.crear_punto_prueba);
 app.get('/api/desconectados', api.desconectados);
 app.get('/api/conectados_este_mes', api.conectados_este_mes);
 app.get('/api/conectados_en_total', api.conectados_en_total);
+app.get('/api/localizar', api.localizar);
 
 app.get('/api/eventos', api.eventos);
 

@@ -64,7 +64,7 @@ function crear_punto_desde_mac(ip, mac, callback) {
   var url = "http://api.hostip.info/get_json.php?ip=" + ip + "&position=true";
   var dx = rand_int(-0.01, 0.01);
   var dy = rand_int(-0.01, 0.01);
-  
+
 
   getJSON(url, function(data) {
     var data = {
@@ -74,7 +74,7 @@ function crear_punto_desde_mac(ip, mac, callback) {
       ip: ip,
       message: "Equipo mac: " + mac + " ip:" + ip
     }
-    
+
     var punto = new Punto(data);
     callback(punto);
   });
@@ -111,7 +111,7 @@ exports.crear_punto = function(req, res) {
   if (req.body.mac) {
     var ip = req.ip;
     var mensaje = "Se ha conectado un equipo: mac=" + req.body.mac + " ip=" + ip;
-  
+
     crear_evento(mensaje);
 
     crear_punto_desde_mac(ip, req.body.mac, function(punto) {
@@ -125,10 +125,25 @@ exports.crear_punto = function(req, res) {
 }
 
 /*
+ * Devuelve IP, latitud y longitud del que consulta.
+ */
+exports.localizar = function(req, res) {
+    url = 'http://api.ipinfodb.com/v3/ip-city/';
+    url += '?key=c6896eb093e632524b73058a2d1fbc367acca0df9a63e67b1b3ddec8d859f859';
+    url += '&format=json';
+    url += '&ip='+req.ip;
+
+    getJSON(url, function(data) {
+        res.json({ip: data.ipAddress, lat: data.latitude, lon: data.longitude})
+    });
+}
+
+
+/*
  * Se le notifica que ha llegado un nuevo equipo al sistema.
  *
  * Ejemplo de invocación:
- * 
+ *
  *     curl -d "lat=-34.428351&lng=-66.362915&contenido=Hola" http://localhost:3000/api/puntosprueba
  */
 exports.crear_punto_prueba = function(req, res) {
@@ -143,37 +158,37 @@ exports.crear_punto_prueba = function(req, res) {
 /*
  * Retorna un diccionario con dos fechas que representan
  * el mes actual.
- */ 
+ */
 function obtener_rango_de_fechas_este_mes() {
   var hoy = new Date();
   var inicio = new Date();
   var fin = new Date();
-  
+
   inicio.setDate(1);
   fin.setDate(1);
   fin.setMonth(fin.getMonth()+1);
-  
+
   return  {"$gte": inicio, "$lt": fin};
 }
 
 exports.desconectados = function(req, res) {
-  
+
   Evento.find({}, function(err, result) {
   	var criterio_de_orden = obtener_rango_de_fechas_este_mes();
     var cantidad_total = result.length;
-    
+
     Evento.find({"fecha": criterio_de_orden}, function(err, result) {
       var cantidad_este_mes = result.length;
       res.json({cantidad: cantidad_total - cantidad_este_mes});
     })
-    
+
   });
 
 }
 
 exports.conectados_este_mes = function(req, res) {
   var criterio_de_orden = obtener_rango_de_fechas_este_mes();
-  
+
   Evento.find({"fecha": criterio_de_orden}, function(err, result) {
     var cantidad = result.length;
     res.json({cantidad: cantidad});
