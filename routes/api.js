@@ -98,6 +98,17 @@ function crear_evento(mensaje) {
   evento.save();
 }
 
+
+function obtener_ip(res) {
+  var ip = res.ip;
+
+  if (res.ips) {
+    ip = res.ips.pop();
+  }
+
+  return ip;
+}
+
 /*
  * Se le notifica que ha llegado un nuevo equipo al sistema.
  *
@@ -109,7 +120,7 @@ exports.crear_punto = function(req, res) {
   var punto;
 
   if (req.body.mac) {
-    var ip = req.ip;
+    var ip = obtener_ip(req);
     var mensaje = "Se ha conectado un equipo: mac=" + req.body.mac + " ip=" + ip;
 
     crear_evento(mensaje);
@@ -131,7 +142,7 @@ exports.localizar = function(req, res) {
     url = 'http://api.ipinfodb.com/v3/ip-city/';
     url += '?key=c6896eb093e632524b73058a2d1fbc367acca0df9a63e67b1b3ddec8d859f859';
     url += '&format=json';
-    url += '&ip='+req.ip;
+    url += '&ip='+obtener_ip(req);
 
     getJSON(url, function(data) {
         res.json({ip: data.ipAddress, lat: data.latitude, lon: data.longitude})
