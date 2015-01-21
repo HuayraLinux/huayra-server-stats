@@ -99,13 +99,8 @@ function crear_evento(mensaje) {
 }
 
 
-function obtener_ip(res) {
-  var ip = res.ip;
-
-  if (res.ips) {
-    ip = res.ips.pop();
-  }
-
+function obtener_ip(req) {
+  var ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
   return ip;
 }
 
