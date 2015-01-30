@@ -7,6 +7,21 @@ cada cada gestor escolar distribuido en el Pais.
 ![](./images/preview.png)
 
 
+Como empezar
+------------
+
+El primer paso es iniciar un servidor de mongodb, generalmente
+con el comando ``mongod``.
+
+Luego se tienen que cargar los datos de prueba:
+
+		node load_fixtures.js
+
+Y por último editar el archivo ``crear_admin.js`` con los datos
+de los usuarios que se quieran crear, y ejecutar este comando:
+
+		node crear_admin.js
+
 API
 ---
 
