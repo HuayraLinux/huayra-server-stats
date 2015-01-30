@@ -19,13 +19,7 @@ var eventoSchema = mongoose.Schema({
 });
 var Evento = mongoose.model('Evento', eventoSchema)
 
-
-var usuarioSchema = mongoose.Schema({
-  nombre: String,
-  hash: String,
-});
-var Usuario = mongoose.model('Usuario', usuarioSchema)
-
+var Usuario = require('../models/Usuario');
 
 exports.puntos = function(req, res) {
   Punto.find(function(err, data) {
@@ -128,7 +122,7 @@ exports.crear_punto = function(req, res) {
     res.status(400);
     res.json({error: 400});
   }
-}
+};
 
 /*
  * Devuelve IP, latitud y longitud del que consulta.
@@ -142,7 +136,7 @@ exports.localizar = function(req, res) {
     getJSON(url, function(data) {
         res.json({ip: data.ipAddress, lat: data.latitude, lon: data.longitude})
     });
-}
+};
 
 
 /*
@@ -159,7 +153,30 @@ exports.crear_punto_prueba = function(req, res) {
     punto.save();
     res.json({status: 'ok', punto: punto});
   }
-}
+};
+
+
+exports.autenticar_usuario = function(req, res) {
+  console.log(req.body.nombre);
+
+  Usuario.find({"name": req.body.nombre}, function(err, result) {
+    var cantidad = result.length;
+
+    if (cantidad == 0) {
+      res.json({error: "Usuario o password incorrectos"});
+      console.log("Informando acceso incorrecto porque no ingresa datos");
+    } else {
+      if (result[0].password === req.body.passwd_md5) {
+        res.json({token: cantidad});
+        console.log("Asignando token, ingresando al sistema...");
+      } else {
+        res.json({error: "Usuario o password incorrectos"});
+        console.log("Informando acceso incorrecto");
+      }
+    }
+  });
+
+};
 
 /*
  * Retorna un diccionario con dos fechas que representan
@@ -175,7 +192,7 @@ function obtener_rango_de_fechas_este_mes() {
   fin.setMonth(fin.getMonth()+1);
 
   return  {"$gte": inicio, "$lt": fin};
-}
+};
 
 exports.desconectados = function(req, res) {
 
@@ -190,7 +207,7 @@ exports.desconectados = function(req, res) {
 
   });
 
-}
+};
 
 exports.conectados_este_mes = function(req, res) {
   var criterio_de_orden = obtener_rango_de_fechas_este_mes();
@@ -199,11 +216,28 @@ exports.conectados_este_mes = function(req, res) {
     var cantidad = result.length;
     res.json({cantidad: cantidad});
   })
-}
+};
 
 exports.conectados_en_total = function(req, res) {
   Evento.find({}, function(err, result) {
     var cantidad = result.length;
     res.json({cantidad: cantidad});
   })
-}
+};
+
+exports.conectados_por_mes = function(req, res) {
+  Evento.find({}, function(err, result) {
+    var cantidad = result.length;
+    var valores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var indice_de_mes = 0;
+
+
+    for (var i=0; i<result.length; i++) {
+      indice_de_mes = result[i].fecha.getMonth();
+
+      valores[indice_de_mes] += 1;
+    }
+
+    res.json({valores: valores});
+  })
+};

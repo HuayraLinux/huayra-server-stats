@@ -8,7 +8,7 @@ Usuario.collection.drop();
 var datos = {
     name: 'admin',
     email: 'admin@admin.com',
-    password: 'asdasd'
+    password: 'asd123'
 };
 
 Usuario.create(datos, function(err) {

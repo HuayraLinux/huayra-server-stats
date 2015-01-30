@@ -8,23 +8,44 @@ var controllers = angular.module('myApp.controllers', []);
 
 
 
-controllers.factory('SessionService', function() {
-  var current_user = undefined;
+controllers.factory('SessionService', function($http) {
+  var current_user = null;
 
   return {
     autenticar: function(nombre, password, exito_callback, error_callback) {
 
-      if (nombre == 'admin' && password == '123123') {
-        current_user = nombre;
-        exito_callback();
-      } else {
-        current_user = undefined;
-        error_callback();
-      }
+      $http({
+        url: 'http://localhost:3000/api/login',
+        method: "POST",
+        data: {
+                'nombre': nombre,
+                'passwd_md5': password,
+              }
+      })
+      .then(function(response) {
+
+        if (response.data.token) {
+          current_user = nombre;
+          exito_callback();
+        } else {
+          current_user = null;
+          error_callback();
+        }
+      },
+        function(reason) {
+          current_user = null;
+          error_callback();
+        }
+      );
+
     },
 
     autentificado: function() {
       return !!current_user;
+    },
+
+    logout: function() {
+      current_user = null;
     }
   };
 });
@@ -48,9 +69,18 @@ controllers.controller("LoginCtrl", function($scope, $location, SessionService) 
   }
 });
 
-controllers.controller('MapasCtrl', function ($scope, $http) {
+controllers.controller('LogoutCtrl', function(SessionService, $location) {
+  SessionService.logout();
+  $location.path('login');
+});
+
+controllers.controller('MapasCtrl', function ($scope, $http, SessionService, $location) {
   var puntos_del_mapa = {};
   $scope.cargando = "Cargando ...";
+
+  if (!SessionService.autentificado())
+    $location.path('login');
+
 
   angular.extend($scope, {
     center: {
@@ -118,31 +148,15 @@ controllers.controller('MapasCtrl', function ($scope, $http) {
 });
 
 
-controllers.controller('EstadisticasCtrl', function ($scope, $http) {
+controllers.controller('EstadisticasCtrl', function ($scope, $http, SessionService, $location) {
     $scope.eventos = [];
     $scope.equipos_sin_reportarse = 0;
     $scope.equipos_conectados_en_total = 0;
     $scope.equipos_conectados_este_mes = 0;
 
+    if (!SessionService.autentificado())
+      $location.path('login');
 
-
-    $scope.criterios = [
-      {etiqueta: 'Todos', valor: 0},
-      {etiqueta: 'Este mes', valor: 1},
-      {etiqueta: 'Solo hoy', valor: 2},
-    ];
-    $scope.criterio = $scope.criterios[0];
-
-
-    $scope.$watch('criterio', function (nuevo, anterior) {
-      var datos = {
-        0: [28, 48, 40, 19, 96, 247, 100, 237, 100, 27, 250, 200],
-        1: [18, 18, 10, 19, 16, 24, 20, 22, 33, 17, 25, 20],
-        2: [8, 8, 4, 2, 6, 4, 10, 12, 10, 9, 10, 10],
-      }
-
-      $scope.datos.datasets[0].data = datos[nuevo.valor];
-    });
 
     $scope.options = {width: 500, height: 300};
 
@@ -177,9 +191,13 @@ controllers.controller('EstadisticasCtrl', function ($scope, $http) {
       {
         fillColor : 'rgba(151,187,205,0.5)',
         strokeColor : 'rgba(151,187,205,1)',
-        data : [ 28, 48, 40, 19, 96, 27, 100, 27, 100, 27, 100, 200]
+        data : []
       }
       ]
     };
+
+    $http.get('api/conectados_por_mes').then(function(res) {
+      $scope.datos.datasets[0].data = res.data.valores;
+    });
 
   });

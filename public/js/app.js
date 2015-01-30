@@ -23,6 +23,10 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: 'partials/login',
       controller: 'LoginCtrl'
     }).
+    when('/logout', {
+      templateUrl: 'partials/logout',
+      controller: 'LogoutCtrl'
+    }).
     otherwise({
       redirectTo: '/login'
     });
