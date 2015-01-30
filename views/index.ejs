@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Servidores escolares</title>
+    <title>huayra-stats</title>
     <meta name="description" content="Un sistema de reportes y estadisticas de servidores">
     <meta name="author" content="Hugo Ruscitti">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,8 +23,8 @@
 
   <body>
 
-	<header class="dark_grey"> <!-- Header start -->
-	    <a href="#" class="logo_image"><span>HuayraStats</strong></span></a>
+	<header class="dark_grey">
+	    <a href="#" class="logo_image"><span>Huayra-Stats</strong></span></a>
 	    <ul class="header_actions pull-left">
 	        <li rel="tooltip" data-placement="bottom" title="Ocultar barra de navegación" ><a href="#" class="hide_navigation"><i class="icon-chevron-left"></i></a></li>
 	    </ul>
@@ -40,54 +40,54 @@
 	<ng-view></ng-view>
 
 
-	<script src='js/d3.v3.min.js'></script>
-	<script src='js/reusable_charts.js'></script>
+	<script src='js/libs/d3.v3.min.js'></script>
+	<script src='js/libs/reusable_charts.js'></script>
 
 
 	<script src='bower_components/angular/angular.js'></script>
-	<script src='js/services.js'></script>
-	<script src='js/app.js'></script>
-	<script src='js/controllers.js'></script>
-	<script src='js/filters.js'></script>
-	<script src='js/directives.js'></script>
+	<script src='js/libs/services.js'></script>
+	<script src='js/libs/app.js'></script>
+	<script src='js/libs/controllers.js'></script>
+	<script src='js/libs/filters.js'></script>
+	<script src='js/libs/directives.js'></script>
 
 
 	<!-- Plugins Bootstrap -->
-	<script src="js/jquery-1.10.2.js"></script>
-	<script src="js/jquery-ui-1.10.3.js"></script>
-	<script src="js/bootstrap.js"></script>
+	<script src="js/libs/jquery-1.10.2.js"></script>
+	<script src="js/libs/jquery-ui-1.10.3.js"></script>
+	<script src="js/libs/bootstrap.js"></script>
 
-	<script src="js/library/jquery.collapsible.min.js"></script>
-	<script src="js/library/jquery.mCustomScrollbar.min.js"></script>
-	<script src="js/library/jquery.mousewheel.min.js"></script>
-	<script src="js/library/jquery.uniform.min.js"></script>
+	<script src="js/libs/library/jquery.collapsible.min.js"></script>
+	<script src="js/libs/library/jquery.mCustomScrollbar.min.js"></script>
+	<script src="js/libs/library/jquery.mousewheel.min.js"></script>
+	<script src="js/libs/library/jquery.uniform.min.js"></script>
 
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCL6XtCGot7S7cfxnO6tRfeZx9kLQQRMtA&amp;sensor=false"></script>
-	<script src="js/library/jquery.sparkline.min.js"></script>
-	<script src="js/library/chosen.jquery.min.js"></script>
-	<script src="js/library/jquery.easytabs.js"></script>
+	<script src="js/libs/library/jquery.sparkline.min.js"></script>
+	<script src="js/libs/library/chosen.jquery.min.js"></script>
+	<script src="js/libs/library/jquery.easytabs.js"></script>
 
 	<!--
-	<script src="js/library/maps/jquery.vmap.js"></script>
-	<script src="js/library/maps/maps/jquery.vmap.world.js"></script>
-	<script src="js/library/maps/data/jquery.vmap.sampledata.js"></script>
+	<script src="js/libs/library/maps/jquery.vmap.js"></script>
+	<script src="js/libs/library/maps/maps/jquery.vmap.world.js"></script>
+	<script src="js/libs/library/maps/data/jquery.vmap.sampledata.js"></script>
 	-->
 	<!-- plugins adicionales -->
-	<script src="js/library/jquery.autosize-min.js"></script>
-	<script src="js/library/charCount.js"></script>
-	<script src="js/library/jquery.minicolors.js"></script>
-	<script src="js/library/jquery.tagsinput.js"></script>
-	<script src="js/library/fullcalendar.min.js"></script>
-	<script src="js/library/footable/footable.js"></script>
-	<script src="js/library/footable/data-generator.js"></script>
+	<script src="js/libs/library/jquery.autosize-min.js"></script>
+	<script src="js/libs/library/charCount.js"></script>
+	<script src="js/libs/library/jquery.minicolors.js"></script>
+	<script src="js/libs/library/jquery.tagsinput.js"></script>
+	<script src="js/libs/library/fullcalendar.min.js"></script>
+	<script src="js/libs/library/footable/footable.js"></script>
+	<script src="js/libs/library/footable/data-generator.js"></script>
 
-	<script src="js/library/bootstrap-datetimepicker.js"></script>
-	<script src="js/library/bootstrap-timepicker.js"></script>
-	<script src="js/library/bootstrap-datepicker.js"></script>
-	<script src="js/library/bootstrap-fileupload.js"></script>
-	<script src="js/library/jquery.inputmask.bundle.js"></script>
+	<script src="js/libs/library/bootstrap-datetimepicker.js"></script>
+	<script src="js/libs/library/bootstrap-timepicker.js"></script>
+	<script src="js/libs/library/bootstrap-datepicker.js"></script>
+	<script src="js/libs/library/bootstrap-fileupload.js"></script>
+	<script src="js/libs/library/jquery.inputmask.bundle.js"></script>
 
-	<script src="js/flatpoint_core.js"></script>
+	<script src="js/libs/flatpoint_core.js"></script>
 
   	<script>
       jQuery(document).ready(function($) {
@@ -116,17 +116,17 @@
       });
  	</script>
 
-	<script src="js/calendar.js"></script>
-	<script src="js/forms.js"></script>
-	<script src="js/dashboard.js"></script>
+	<script src="js/libs/calendar.js"></script>
+	<script src="js/libs/forms.js"></script>
+	<script src="js/libs/dashboard.js"></script>
 
 	<!-- Mapa -->
-	<script src='js/leaflet.js'></script>
-	<script src='js/angular-leaflet-directive.min.js'></script>
+	<script src='js/libs/leaflet.js'></script>
+	<script src='js/libs/angular-leaflet-directive.min.js'></script>
 
-	<script src="js/tc-angular-chartjs.js"></script>
-	<script src="js/Chart.js"></script>
-	<script src="js/bar.js"></script>
+	<script src="js/libs/tc-angular-chartjs.js"></script>
+	<script src="js/libs/Chart.js"></script>
+	<script src="js/libs/bar.js"></script>
 
   </body>
 

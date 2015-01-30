@@ -17,8 +17,7 @@ controllers.factory('SessionService', function() {
       if (nombre == 'admin' && password == '123123') {
         current_user = nombre;
         exito_callback();
-      }
-      else {
+      } else {
         current_user = undefined;
         error_callback();
       }
@@ -125,8 +124,8 @@ controllers.controller('EstadisticasCtrl', function ($scope, $http) {
     $scope.equipos_conectados_en_total = 0;
     $scope.equipos_conectados_este_mes = 0;
 
-    
-    
+
+
     $scope.criterios = [
       {etiqueta: 'Todos', valor: 0},
       {etiqueta: 'Este mes', valor: 1},
@@ -159,7 +158,7 @@ controllers.controller('EstadisticasCtrl', function ($scope, $http) {
       $scope.eventos = registros;
     });
 
-    
+
     $http.get('api/desconectados').then(function(res) {
       $scope.equipos_sin_reportarse = res.data.cantidad;
     });
@@ -167,11 +166,11 @@ controllers.controller('EstadisticasCtrl', function ($scope, $http) {
     $http.get('api/conectados_este_mes').then(function(res) {
       $scope.equipos_conectados_este_mes = res.data.cantidad;
     });
-  
+
     $http.get('api/conectados_en_total').then(function(res) {
       $scope.equipos_conectados_en_total = res.data.cantidad;
     });
-  
+
     $scope.datos = {
       labels : ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
       datasets : [
@@ -182,5 +181,5 @@ controllers.controller('EstadisticasCtrl', function ($scope, $http) {
       }
       ]
     };
-    
+
   });
