@@ -15,7 +15,7 @@ controllers.factory('SessionService', function($http) {
     autenticar: function(nombre, password, exito_callback, error_callback) {
 
       $http({
-        url: 'http://localhost:3000/api/login',
+        url: '/api/login',
         method: "POST",
         data: {
                 'nombre': nombre,
